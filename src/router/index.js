@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/views/dashboard/Index';
-import UsersTable from '@/views/Users/UsersTable';
+import MembersTable from '@/views/Members/MembersTable';
 import Home from "@/views/Home";
-import UsersForm from "@/views/Users/UsersForm";
+import MembersForm from "@/views/Members/MembersForm";
+import LoansForm from "@/views/Loans/LoansForm";
+import LoansTable from "@/views/Loans/LoansTable";
 
 Vue.use(VueRouter)
 
@@ -18,14 +20,24 @@ const routes = [
         component: Home,
       },
       {
-        name: 'UsersTable',
-        path: 'usersTable',
-        component: UsersTable,
+        name: 'MembersTable',
+        path: 'membersTable',
+        component: MembersTable,
       },
       {
-        name: 'UsersForm',
-        path: 'usersForm',
-        component: UsersForm,
+        name: 'MembersForm',
+        path: 'membersForm/:id?',
+        component: MembersForm,
+      },
+      {
+        name: 'LoansForm',
+        path: 'loansForm',
+        component: LoansForm,
+      },
+      {
+        name: 'LoansTable',
+        path: 'loansTable',
+        component: LoansTable,
       },
     ]
   },

@@ -53,8 +53,10 @@ export default {
     return {
       items: [
         { title: 'Home', icon: 'mdi-home', link: '/' },
-        { title: 'Usuarios', icon: 'mdi-account', link: '/usersTable' },
-        { title: 'Prestamos', icon: 'mdi-cash-multiple', link: '/prestamos' },
+        { title: 'Miembros', icon: 'mdi-account', link: '/membersTable' },
+        { title: 'Prestamos', icon: 'mdi-cash-multiple', link: '/loansTable' },
+        { title: 'Pagos', icon: 'mdi-cash-refund', link: '/paids' },
+        { title: 'Depositos', icon: 'mdi-cash-plus', link: '/depositsTable' },
       ],
       right: null,
     }
