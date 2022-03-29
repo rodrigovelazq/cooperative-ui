@@ -20,7 +20,6 @@
         ></v-divider>
         <v-spacer></v-spacer>
         <v-text-field
-            :value="search"
             clearable
             label="Buscar"
             single-line
@@ -100,14 +99,11 @@ export default {
     },
     sortOrder: {
       type: String
-    },
-    search: {
-      type: String
     }
   },
   data: () => ({
     dialogDelete: false,
-    selectedDelete: null
+    selectedDelete: null,
   }),
 
   watch: {
@@ -119,7 +115,7 @@ export default {
   methods: {
     editItem (item) {
       console.log(item);
-      router.push(`usersForm`);
+      router.push(`${this.link}/${item.id}`);
     },
 
     deleteItem (item) {

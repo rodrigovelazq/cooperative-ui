@@ -43,6 +43,12 @@
           ></v-text-field>
           <v-btn
               class="mr-4"
+              to="/membersTable"
+              color="secondary">
+            cancelar
+          </v-btn>
+          <v-btn
+              class="mr-4"
               color="primary"
               @click="submit"
           >

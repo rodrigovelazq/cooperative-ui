@@ -31,7 +31,7 @@ const routes = [
       },
       {
         name: 'LoansForm',
-        path: 'loansForm',
+        path: 'loansForm/:id?',
         component: LoansForm,
       },
       {
