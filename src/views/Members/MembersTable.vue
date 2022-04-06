@@ -71,8 +71,7 @@ export default {
     },
     handleDelete(item){
       axios.delete(`http://127.0.0.1:8000/api/members/${item.id}`,)
-          .then(response => {
-            console.log(response)
+          .then(() => {
             this.retrieveMembers();
           });
     }

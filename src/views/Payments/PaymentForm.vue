@@ -183,7 +183,6 @@ export default {
     deleteItemConfirm() {
       axios.delete(`http://127.0.0.1:8000/api/payments/${this.selectedPayment.id}`,)
           .then(response => {
-            console.log(response)
             this.retrievePayments(this.selectedLoan.id);
           });
       this.closeDelete();
@@ -215,8 +214,7 @@ export default {
           payment_date: this.selectedPayment.payment_date,
           amount: this.selectedPayment.amount,
           loans_id: this.selectedLoan.id
-        }).then(response => {
-              console.log(response)
+        }).then(() => {
               this.retrievePayments(this.selectedLoan.id);
             });
       } else {

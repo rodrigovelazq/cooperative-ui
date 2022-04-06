@@ -14,7 +14,7 @@
           :complete="e1 > 2"
           step="2"
       >
-        Seleccione el pago
+        Pagos
       </v-stepper-step>
     </v-stepper-header>
 

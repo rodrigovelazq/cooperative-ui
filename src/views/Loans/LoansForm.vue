@@ -177,8 +177,7 @@ export default {
                 members_id: this.member.id,
                 loan_date: this.loan_date,
                 amount: this.amount
-              }).then(response => {
-            console.log(response);
+              }).then(() => {
             router.push('membersTable')
           });
         } else {
@@ -187,8 +186,7 @@ export default {
                 members_id: this.member.id,
                 loan_date: this.loan_date,
                 amount: this.amount
-              }).then(response => {
-            console.log(response);
+              }).then(() => {
             router.push('loansTable')
           });
         }
@@ -209,7 +207,6 @@ export default {
       this.retrieveMembers();
     },
     handleSelected(value) {
-      console.log(value);
       this.member = value;
     },
     formatDate(date) {

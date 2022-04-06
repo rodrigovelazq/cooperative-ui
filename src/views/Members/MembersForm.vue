@@ -137,7 +137,6 @@ export default {
                 email: this.email,
                 identity_number: this.identityNumber
               }).then(response => {
-            console.log(response);
             router.push('membersTable')
           });
         } else {
@@ -147,8 +146,7 @@ export default {
                 last_name: this.lastName,
                 email: this.email,
                 identity_number: this.identityNumber
-              }).then(response => {
-            console.log(response);
+              }).then(() => {
             router.push('membersTable')
           });
         }
