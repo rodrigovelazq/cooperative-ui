@@ -114,7 +114,6 @@ export default {
 
   methods: {
     editItem (item) {
-      console.log(item);
       router.push(`${this.link}/${item.id}`);
     },
 

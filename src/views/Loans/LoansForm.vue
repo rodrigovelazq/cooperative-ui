@@ -105,7 +105,7 @@
 import {validationMixin} from 'vuelidate'
 import {required, minValue} from 'vuelidate/lib/validators'
 import SelectableTable from "@/components/SelectableTable";
-import axios from "axios";
+import axios from "../../plugins/axios";
 import router from "@/router";
 
 export default {
@@ -142,7 +142,7 @@ export default {
   }),
   mounted() {
     if (this.$route.params.id) {
-      axios.get(`http://127.0.0.1:8000/api/loans/${this.$route.params.id}`)
+      axios.get(`/loans/${this.$route.params.id}`)
           .then(response => {
             this.member = response.data.members;
             this.loan_date = response.data.loan_date;
@@ -153,7 +153,7 @@ export default {
   methods: {
     retrieveMembers() {
       axios
-          .get('http://127.0.0.1:8000/api/members',
+          .get('/members',
               {
                 params: {
                   page: this.page,
@@ -172,7 +172,7 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         if (this.$route.params.id) {
-          axios.put(`http://127.0.0.1:8000/api/loans/${this.$route.params.id}`,
+          axios.put(`/loans/${this.$route.params.id}`,
               {
                 members_id: this.member.id,
                 loan_date: this.loan_date,
@@ -181,7 +181,7 @@ export default {
             router.push('membersTable')
           });
         } else {
-          axios.post('http://127.0.0.1:8000/api/loans',
+          axios.post('/loans',
               {
                 members_id: this.member.id,
                 loan_date: this.loan_date,

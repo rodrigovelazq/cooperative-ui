@@ -42,7 +42,7 @@ export default {
     getReport(){
       axios.request({
         responseType: 'arraybuffer',
-        url: `http://127.0.0.1:8000/api/file-export/${this.selectedYear}`,
+        url: `/file-export/${this.selectedYear}`,
         method: 'get',
         loanHeaders: {
           'Content-Type': 'blob',

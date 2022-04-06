@@ -17,7 +17,7 @@
 
 <script>
 import DataTable from "@/components/DataTable";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export default {
   components: {DataTable},
@@ -40,7 +40,7 @@ export default {
   methods: {
     retrieveMembers() {
       axios
-          .get('http://127.0.0.1:8000/api/members',
+          .get('/members',
               {
                 params: {
                     page: this.page,
@@ -70,7 +70,7 @@ export default {
       this.retrieveMembers();
     },
     handleDelete(item){
-      axios.delete(`http://127.0.0.1:8000/api/members/${item.id}`,)
+      axios.delete(`/members/${item.id}`,)
           .then(() => {
             this.retrieveMembers();
           });

@@ -64,7 +64,7 @@
 <script>
 import {validationMixin} from 'vuelidate'
 import {required, maxLength, email} from 'vuelidate/lib/validators'
-import axios from "axios";
+import axios from "../../plugins/axios";
 import router from "@/router";
 
 
@@ -87,7 +87,7 @@ export default {
   }),
   mounted() {
     if (this.$route.params.id) {
-      axios.get(`http://127.0.0.1:8000/api/members/${this.$route.params.id}`)
+      axios.get(`/members/${this.$route.params.id}`)
           .then(response => {
             this.firstName = response.data.first_name;
             this.lastName = response.data.last_name;
@@ -130,17 +130,17 @@ export default {
       this.$v.$touch();
       if (!this.$v.$invalid) {
         if (this.$route.params.id) {
-          axios.put(`http://127.0.0.1:8000/api/members/${this.$route.params.id}`,
+          axios.put(`/members/${this.$route.params.id}`,
               {
                 first_name: this.firstName,
                 last_name: this.lastName,
                 email: this.email,
                 identity_number: this.identityNumber
-              }).then(response => {
+              }).then(() => {
             router.push('membersTable')
           });
         } else {
-          axios.post('http://127.0.0.1:8000/api/members',
+          axios.post('/members',
               {
                 first_name: this.firstName,
                 last_name: this.lastName,

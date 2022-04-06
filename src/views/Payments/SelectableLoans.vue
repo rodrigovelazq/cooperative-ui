@@ -17,7 +17,7 @@
 
 <script>
 import SelectableTable from "@/components/SelectableTable";
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export default {
   components: {SelectableTable},
@@ -45,7 +45,7 @@ export default {
   }),
   methods: {
     retrieveLoans() {
-      axios.get('http://127.0.0.1:8000/api/loans',
+      axios.get('/loans',
               {
                 params: {
                   page: this.pageLoans,

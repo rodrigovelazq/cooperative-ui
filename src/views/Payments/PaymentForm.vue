@@ -134,7 +134,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "../../plugins/axios";
 
 export default {
   name: "PaymentForm",
@@ -181,14 +181,14 @@ export default {
       this.dialogDelete = true
     },
     deleteItemConfirm() {
-      axios.delete(`http://127.0.0.1:8000/api/payments/${this.selectedPayment.id}`,)
-          .then(response => {
+      axios.delete(`/payments/${this.selectedPayment.id}`,)
+          .then(() => {
             this.retrievePayments(this.selectedLoan.id);
           });
       this.closeDelete();
     },
     retrievePayments(id) {
-      axios.get(`http://127.0.0.1:8000/api/payments/${id}/loans`)
+      axios.get(`/payments/${id}/loans`)
           .then(response => {
             this.payments = response.data;
           });
@@ -209,7 +209,7 @@ export default {
     },
     saveForm() {
       if (this.selectedPayment.id) {
-        axios.put(`http://127.0.0.1:8000/api/payments/${this.selectedPayment.id}`, {
+        axios.put(`/payments/${this.selectedPayment.id}`, {
           id: this.selectedPayment.id,
           payment_date: this.selectedPayment.payment_date,
           amount: this.selectedPayment.amount,
@@ -219,7 +219,7 @@ export default {
             });
       } else {
         console.log(this.selectedLoan.id);
-        axios.post(`http://127.0.0.1:8000/api/payments`, {
+        axios.post(`/payments`, {
           payment_date: this.selectedPayment.payment_date,
           amount: this.selectedPayment.amount,
           loans_id: this.selectedLoan.id
