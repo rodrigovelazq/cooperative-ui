@@ -27,13 +27,21 @@
             md="6">
           <v-text-field
               disabled
+              :error-messages="firstNameErrors"
               :value="member.first_name"
               label="Nombre"
+              required
+              @input="$v.member.first_name.$touch()"
+              @blur="$v.member.first_name.$touch()"
           ></v-text-field>
           <v-text-field
               disabled
+              :error-messages="lastNameErrors"
               :value="member.last_name"
               label="Apellido"
+              required
+              @input="$v.member.last_name.$touch()"
+              @blur="$v.member.last_name.$touch()"
           ></v-text-field>
           <v-text-field
               disabled
@@ -70,6 +78,10 @@
               v-model="amount"
               type="number"
               prefix="Gs."
+              required
+              :error-messages="amountErrors"
+              @input="$v.amount.$touch()"
+              @blur="$v.amount.$touch()"
           ></v-text-field>
           <v-btn
               class="mr-4"
@@ -90,12 +102,22 @@
 </template>
 
 <script>
+import {validationMixin} from 'vuelidate'
+import {required, minValue} from 'vuelidate/lib/validators'
 import SelectableTable from "@/components/SelectableTable";
 import axios from "axios";
 import router from "@/router";
 
 export default {
   name: "LoansForm",
+  mixins: [validationMixin],
+  validations: {
+    member: {
+      first_name: {required},
+      last_name: {required},
+    },
+    amount: {required, minValue: minValue(1)}
+  },
   components: {SelectableTable},
   data: () => ({
     headers: [
@@ -103,7 +125,7 @@ export default {
       {text: 'Nombre', value: 'first_name'},
       {text: 'Apellido', value: 'last_name'},
       {text: 'Email', value: 'email'},
-      {text: 'Actions', value: 'actions', sortable: false},
+      {text: 'Acciones', value: 'actions', sortable: false},
     ],
     rows: [],
     page: 1,
@@ -147,12 +169,14 @@ export default {
           });
     },
     submit() {
+      this.$v.$touch();
+      if (!this.$v.$invalid) {
         if (this.$route.params.id) {
           axios.put(`http://127.0.0.1:8000/api/loans/${this.$route.params.id}`,
               {
-                members_id : this.member.id,
-                loan_date : this.loan_date,
-                amount : this.amount
+                members_id: this.member.id,
+                loan_date: this.loan_date,
+                amount: this.amount
               }).then(response => {
             console.log(response);
             router.push('membersTable')
@@ -160,14 +184,15 @@ export default {
         } else {
           axios.post('http://127.0.0.1:8000/api/loans',
               {
-                members_id : this.member.id,
-                loan_date : this.loan_date,
-                amount : this.amount
+                members_id: this.member.id,
+                loan_date: this.loan_date,
+                amount: this.amount
               }).then(response => {
             console.log(response);
             router.push('loansTable')
           });
         }
+      }
     },
     handlePagination(value) {
       this.page = value.page;
@@ -179,11 +204,11 @@ export default {
       this.sortOrder = value.sortDesc[0] ? 'DESC' : 'ASC';
       this.retrieveMembers();
     },
-    handleSearchChange(value){
+    handleSearchChange(value) {
       this.search = value;
       this.retrieveMembers();
     },
-    handleSelected(value){
+    handleSelected(value) {
       console.log(value);
       this.member = value;
     },
@@ -196,6 +221,25 @@ export default {
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.loan_date)
+    },
+    firstNameErrors() {
+      const errors = []
+      if (!this.$v.member.first_name.$dirty) return errors
+      !this.$v.member.first_name.required && errors.push('Este campo es requerido.')
+      return errors
+    },
+    lastNameErrors() {
+      const errors = []
+      if (!this.$v.member.last_name.$dirty) return errors
+      !this.$v.member.last_name.required && errors.push('Este campo es requerido.')
+      return errors
+    },
+    amountErrors() {
+      const errors = []
+      if (!this.$v.amount.$dirty) return errors
+      !this.$v.amount.minValue && errors.push('Debe ser mayor a 0.')
+      !this.$v.amount.required && errors.push('Este campo es requerido.')
+      return errors
     },
   },
 

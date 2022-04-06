@@ -27,7 +27,7 @@ export default {
       {text: 'Nombre', value: 'first_name'},
       {text: 'Apellido', value: 'last_name'},
       {text: 'Email', value: 'email'},
-      {text: 'Actions', value: 'actions', sortable: false},
+      {text: 'Acciones', value: 'actions', sortable: false},
     ],
     rows: [],
     page: 1,

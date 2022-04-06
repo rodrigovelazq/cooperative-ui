@@ -55,8 +55,8 @@ export default {
         { title: 'Home', icon: 'mdi-home', link: '/' },
         { title: 'Miembros', icon: 'mdi-account', link: '/membersTable' },
         { title: 'Prestamos', icon: 'mdi-cash-multiple', link: '/loansTable' },
-        { title: 'Pagos', icon: 'mdi-cash-refund', link: '/paids' },
-        { title: 'Depositos', icon: 'mdi-cash-plus', link: '/depositsTable' },
+        { title: 'Pagos', icon: 'mdi-cash-refund', link: '/paymentsTable' },
+        { title: 'Reportes', icon: 'mdi-file-chart', link: '/reports' },
       ],
       right: null,
     }

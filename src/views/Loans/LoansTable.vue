@@ -27,7 +27,7 @@ export default {
       {text: 'Fecha', value: 'loan_date'},
       {text: 'Nombre', value: 'members.first_name'},
       {text: 'Apellido', value: 'members.last_name'},
-      {text: 'Actions', value: 'actions', sortable: false},
+      {text: 'Acciones', value: 'actions', sortable: false},
     ],
     items: [],
     page: 1,
